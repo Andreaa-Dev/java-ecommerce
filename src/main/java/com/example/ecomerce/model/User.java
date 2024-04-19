@@ -1,19 +1,20 @@
-package com.example.ecomerce.entities;
+package com.example.ecomerce.model;
 
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
-public class UserEntity {
+public class User {
     private String id;
+    private String name;
     private String email;
     private String password;
 
 
-    public UserEntity(){
+    public User(){
     }
 
-    public UserEntity(String id, String email, String password) {
+    public User(String id, String email, String password, String name) {
         this.id=id;
+        this.name=name;
         this.email=email;
         this.password=password;
     }
@@ -40,5 +41,15 @@ public class UserEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    // add hashed password
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

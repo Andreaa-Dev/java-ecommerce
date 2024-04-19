@@ -1,10 +1,10 @@
-package com.example.ecomerce.entities;
+package com.example.ecomerce.model;
 
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-public class ProductEntity {
+public class Product {
     private String id;
     @NotNull
     private String productName;
@@ -13,11 +13,11 @@ public class ProductEntity {
     private int price;
 
 
-    public ProductEntity(){
+    public Product(){
 
     }
 
-    public ProductEntity(String id, String productName, int price) {
+    public Product(String id, String productName, int price) {
         this.id=id;
         this.productName=productName;
         this.price=price;

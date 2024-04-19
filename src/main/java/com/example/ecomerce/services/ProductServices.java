@@ -1,6 +1,6 @@
 package com.example.ecomerce.services;
 
-import com.example.ecomerce.entities.ProductEntity;
+import com.example.ecomerce.model.Product;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -11,28 +11,28 @@ import java.util.UUID;
 @Service
 public class ProductServices {
 
-    private static Map<String, ProductEntity> productList= new HashMap<>(){{
-        put("1", new ProductEntity("1","product1",1));
+    private static Map<String, Product> productList= new HashMap<>(){{
+        put("1", new Product("1","product1",1));
     }};
 
 
-    public  static Collection<ProductEntity> get() {
+    public  static Collection<Product> get() {
         return productList.values();
     }
 
-    public static ProductEntity get(String productId) {
+    public static Product get(String productId) {
         return productList.get(productId);
     }
 
 
-    public static ProductEntity put( String productName, int productPrice) {
-        ProductEntity product = new ProductEntity();
+    public static Product put(String productName, int productPrice) {
+        Product product = new Product();
         product.setId(UUID.randomUUID().toString());
         productList.put(product.getId(),product );
         return product;
     }
 
-    public ProductEntity remove(String productId) {
+    public Product remove(String productId) {
         return productList.remove(productId);
     }
 
