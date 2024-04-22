@@ -1,11 +1,21 @@
 package com.example.ecomerce.model;
 
-
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Table(name = "product")
+@Entity
 public class Product {
-    private String id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+
     @NotNull
     private String productName;
 

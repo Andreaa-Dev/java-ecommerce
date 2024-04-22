@@ -22,9 +22,8 @@ public class UserController {
         this.userServices = userServices;
     }
 
-    @GetMapping
+    @GetMapping("/")
     public Collection<User> getUsers(){
-
         return userServices.getAllUsers();
     }
 
@@ -37,7 +36,7 @@ public class UserController {
     @PostMapping("/")
     public User createUser(@RequestBody UserCreationDTO userCreationDTO){
         User user = mapper.toUser(userCreationDTO);
-        return userServices.createUser(userCreationDTO);
+        return userServices.createUser(user);
     }
 
 }

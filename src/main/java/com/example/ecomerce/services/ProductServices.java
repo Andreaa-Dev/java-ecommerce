@@ -24,7 +24,6 @@ public class ProductServices {
         return productList.get(productId);
     }
 
-
     public static Product put(String productName, int productPrice) {
         Product product = new Product();
         product.setId(UUID.randomUUID().toString());

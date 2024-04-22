@@ -11,7 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.*;
 
 @RestController
-@RequestMapping("v1/api/users")
+@RequestMapping("v1/api/products")
 public class ProductController {
     // inject dependencies
     private final ProductServices productServices;
@@ -29,10 +29,10 @@ public class ProductController {
 
     }
 
-    @GetMapping("/")
-    public Collection<Product> getAllProducts(){
-        return ProductServices.get();
-    }
+//    @GetMapping("/")
+//    public Collection<Product> getAllProducts(){
+//        return ProductServices.get();
+//    }
 
     @GetMapping("/{productId}")
     public Product getProductById(@PathVariable String productId){
