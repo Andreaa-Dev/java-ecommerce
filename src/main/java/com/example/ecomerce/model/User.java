@@ -1,14 +1,15 @@
 package com.example.ecomerce.model;
 
+import jakarta.persistence.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-
+@Table(name = "users")
 @Entity
 public class User {
 
+    @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
 
@@ -26,6 +27,7 @@ public class User {
         this.email=email;
         this.password=password;
     }
+
 
     public Integer getId() {
         return id;
@@ -51,7 +53,6 @@ public class User {
         this.password = password;
     }
 
-    // add hashed password
 
     public String getName() {
         return name;

@@ -1,37 +1,35 @@
 package com.example.ecomerce.services;
 
-import com.example.ecomerce.dtos.UserCreationDTO;
 import com.example.ecomerce.model.User;
+import com.example.ecomerce.repository.ProductRepository;
+import com.example.ecomerce.repository.UserRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.List;
+
+
 
 @Service
 public class UserServices {
-    private static Map<String, User> userList =new HashMap<>(){{
-        put("1", new User(1,"test@gmail.com", "123","test"));
-    }};
 
+    @Autowired
+    private UserRepository userRepository;
 
-    public Collection<User> getAllUsers() {
-
-        return userList.values();
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
     public User getUserById(Integer userId) {
-
-        return userList.get(userId);
+        return userRepository.findById(userId).orElse(null);
     }
 
     public User createUser(User user) {
-        return user;
+        return userRepository.save(user);
     }
 
-    public User removeUser(Integer userId) {
-
-        return userList.remove(userId);
+    public void removeUser(Integer userId) {
+       userRepository.deleteById(userId);
     }
 }

@@ -1,7 +1,10 @@
 package com.example.ecomerce.dtos;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 public class UserCreationDTO {
-    private String name;
+
     private String email ;
     private String password;
 
@@ -10,10 +13,11 @@ public class UserCreationDTO {
     }
 
     public UserCreationDTO(String email, String password, String name){
-        this.name=name;
         this.email=email;
         this.password=password;
     }
+
+    private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public String getEmail() {
         return email;
@@ -31,11 +35,10 @@ public class UserCreationDTO {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
+
+    // add hashed password
+    public String hashedPassword (String password){
+        return  passwordEncoder.encode(this.password);
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 }

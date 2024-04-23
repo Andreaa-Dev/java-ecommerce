@@ -18,6 +18,7 @@ public class ProductServices {
     private ProductRepository productRepository;
 
     public List<Product> getAllProducts(){
+        // todo: add pagination, sort, filtering
          return productRepository.findAll();
     }
 

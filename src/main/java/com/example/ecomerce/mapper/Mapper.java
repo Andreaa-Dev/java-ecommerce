@@ -5,18 +5,19 @@ import com.example.ecomerce.dtos.UserDTO;
 import com.example.ecomerce.model.User;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @Component
 public class Mapper {
-    // user dto: name
-    // user: name, email,password
+
+    // should be id, name,email, password => email, password
     public UserDTO toDto(User user) {
         String name = user.getName();
         return new UserDTO(name);
     }
 
-    // user creation: email, password
-    // user: id, email,password, name
     public User toUser(UserCreationDTO userDTO) {
-        return new User(12,userDTO.getEmail(), userDTO.getPassword(),"nam" );
+        String password = userDTO.getPassword();
+        return new User(1,userDTO.getEmail(), userDTO.hashedPassword(password),"" );
     }
 }

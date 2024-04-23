@@ -20,6 +20,7 @@ public class ProductController {
     public ProductController(ProductServices productServices) {
         this.productServices=productServices;
     }
+
     @GetMapping("")
     public List<Product> getProducts(){
         return productServices.getAllProducts();
