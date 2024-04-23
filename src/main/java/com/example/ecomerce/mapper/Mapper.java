@@ -17,6 +17,6 @@ public class Mapper {
     // user creation: email, password
     // user: id, email,password, name
     public User toUser(UserCreationDTO userDTO) {
-        return new User("12",userDTO.getEmail(), userDTO.getPassword(),"nam" );
+        return new User(12,userDTO.getEmail(), userDTO.getPassword(),"nam" );
     }
 }

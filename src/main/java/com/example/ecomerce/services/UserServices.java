@@ -12,7 +12,7 @@ import java.util.UUID;
 @Service
 public class UserServices {
     private static Map<String, User> userList =new HashMap<>(){{
-        put("1", new User("1","test@gmail.com", "123","test"));
+        put("1", new User(1,"test@gmail.com", "123","test"));
     }};
 
 
@@ -21,7 +21,7 @@ public class UserServices {
         return userList.values();
     }
 
-    public User getUserById(String userId) {
+    public User getUserById(Integer userId) {
 
         return userList.get(userId);
     }
@@ -30,7 +30,7 @@ public class UserServices {
         return user;
     }
 
-    public User removeUser(String userId) {
+    public User removeUser(Integer userId) {
 
         return userList.remove(userId);
     }

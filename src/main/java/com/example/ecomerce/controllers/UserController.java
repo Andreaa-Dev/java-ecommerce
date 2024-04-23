@@ -18,7 +18,6 @@ public class UserController {
 
     @Autowired
     public UserController(UserServices userServices) {
-
         this.userServices = userServices;
     }
 
@@ -28,9 +27,9 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public User getUserById(@PathVariable String userId){
+    public User getUserById(@PathVariable Integer userId){
 
-        return userServices.getUserById((userId));
+        return userServices.getUserById(userId);
     }
 
     @PostMapping("/")

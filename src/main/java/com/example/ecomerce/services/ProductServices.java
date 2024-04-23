@@ -1,8 +1,11 @@
 package com.example.ecomerce.services;
 
 import com.example.ecomerce.model.Product;
+import com.example.ecomerce.repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,28 +14,22 @@ import java.util.UUID;
 @Service
 public class ProductServices {
 
-    private static Map<String, Product> productList= new HashMap<>(){{
-        put("1", new Product("1","product1",1));
-    }};
+    @Autowired
+    private ProductRepository productRepository;
 
-
-    public  static Collection<Product> get() {
-        return productList.values();
+    public List<Product> getAllProducts(){
+         return productRepository.findAll();
     }
 
-    public static Product get(String productId) {
-        return productList.get(productId);
+    public Product createNewProduct(Product product) {
+        return productRepository.save(product);
     }
 
-    public static Product put(String productName, int productPrice) {
-        Product product = new Product();
-        product.setId(UUID.randomUUID().toString());
-        productList.put(product.getId(),product );
-        return product;
+    public Product findById(Integer productId){
+        return productRepository.findById(productId).orElse(null);
     }
 
-    public Product remove(String productId) {
-        return productList.remove(productId);
+    public void deleteProductById(Integer productId){
+        productRepository.deleteById(productId);
     }
-
 }

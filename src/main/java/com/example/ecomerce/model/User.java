@@ -2,8 +2,16 @@ package com.example.ecomerce.model;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
+@Entity
 public class User {
-    private String id;
+
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Integer id;
+
     private String name;
     private String email;
     private String password;
@@ -12,18 +20,18 @@ public class User {
     public User(){
     }
 
-    public User(String id, String email, String password, String name) {
+    public User(Integer id, String email, String password, String name) {
         this.id=id;
         this.name=name;
         this.email=email;
         this.password=password;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

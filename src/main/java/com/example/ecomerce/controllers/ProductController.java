@@ -16,40 +16,37 @@ public class ProductController {
     // inject dependencies
     private final ProductServices productServices;
 
-    // way1
-//    public ProductController(ProductServices productServices){
-//
-//        this.productServices=productServices;
-//    }
-
-    // way2
     @Autowired
     public ProductController(ProductServices productServices) {
         this.productServices=productServices;
-
+    }
+    @GetMapping("")
+    public List<Product> getProducts(){
+        return productServices.getAllProducts();
     }
 
-//    @GetMapping("/")
-//    public Collection<Product> getAllProducts(){
-//        return ProductServices.get();
-//    }
+    @GetMapping("/test")
+    public String test(){
+        System.out.println("Testing");
+        return "Test";
+    }
+
 
     @GetMapping("/{productId}")
-    public Product getProductById(@PathVariable String productId){
-        Product foundProduct = ProductServices.get(productId);
+    public Product getProductById(@PathVariable Integer productId){
+        Product foundProduct = productServices.findById(productId);
         if(foundProduct == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         return foundProduct;
     }
 
     @DeleteMapping("/{productId}")
-        public void deleteProductById(@PathVariable String productId){
-        Product product= productServices.remove(productId);
-        if(product == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
+        public void deleteProductById(@PathVariable Integer productId){
+         productServices.deleteProductById(productId);
+    }
 
-    @PostMapping("/")
-    public Product createNewProduct(@RequestBody @Validated String productName, int productPrice){
-        return ProductServices.put(productName,productPrice );
 
+    @PostMapping("")
+    public Product createNewProduct(@RequestBody @Validated Product product){
+        return productServices.createNewProduct(product);
     }
 }
