@@ -3,6 +3,7 @@
 1. Todo
 - pagination
 - filter
+- make sure the email is unique => method find user by email in services
 
 
 2. User

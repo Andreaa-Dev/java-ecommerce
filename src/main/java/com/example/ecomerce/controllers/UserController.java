@@ -1,5 +1,12 @@
 package com.example.ecomerce.controllers;
 
+import org.springframework.http.ResponseEntity;
+import com.example.ecomerce.auth.JwtResponse;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import com.example.ecomerce.auth.JwtUtils;
 import com.example.ecomerce.dtos.UserCreationDTO;
 import com.example.ecomerce.mapper.Mapper;
 import com.example.ecomerce.model.User;
@@ -18,6 +25,12 @@ public class UserController {
 
     @Autowired
     private Mapper mapper;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private JwtUtils jwtUtils;
 
     @Autowired
     public UserController(UserServices userServices) {
@@ -44,8 +57,15 @@ public class UserController {
 
 
     @PostMapping("/login")
-    public String logInUser(@RequestBody UserCreationDTO userCreationDTO){
+    public ResponseEntity<?> logInUser(@RequestBody UserCreationDTO userCreationDTO){
 
-        return "user token " ;
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(userCreationDTO.getEmail(), userCreationDTO.getPassword()));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String jwt = jwtUtils.generateJwtToken(userCreationDTO.getEmail());
+        System.out.println(jwt);
+        return ResponseEntity.ok(new JwtResponse(jwt));
     }
 }
