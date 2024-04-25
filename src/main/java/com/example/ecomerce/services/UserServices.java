@@ -1,14 +1,11 @@
 package com.example.ecomerce.services;
 
 import com.example.ecomerce.model.User;
-import com.example.ecomerce.repository.ProductRepository;
 import com.example.ecomerce.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-
 
 
 @Service
@@ -34,6 +31,6 @@ public class UserServices {
     }
 
     public User findUserByEmail(String userEmail){
-        userRepository.findOne(userEmail);
+       return userRepository.findByEmail(userEmail);
     }
 }

@@ -10,6 +10,7 @@
 - user dto => change default name
 - hashed password
 - jwt token
+- validation 
 - 
 
 3. Error

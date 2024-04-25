@@ -3,9 +3,12 @@ package com.example.ecomerce.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
 
 
-
+@Setter
+@Getter
 @Table(name = "product")
 @Entity
 public class Product {
@@ -30,27 +33,4 @@ public class Product {
     }
 
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public Integer getPrice() {
-        return price;
-    }
 }

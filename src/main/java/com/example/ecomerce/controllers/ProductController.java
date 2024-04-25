@@ -11,7 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.*;
 
 @RestController
-@RequestMapping("v1/api/products")
+@RequestMapping("/api/v1/products")
 public class ProductController {
     // inject dependencies
     private final ProductServices productServices;
