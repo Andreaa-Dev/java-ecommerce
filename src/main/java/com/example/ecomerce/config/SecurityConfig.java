@@ -1,5 +1,6 @@
 package com.example.ecomerce.config;
 
+import com.example.ecomerce.auth.JwtFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity(debug = true)
@@ -21,6 +23,9 @@ public class SecurityConfig {
 
     @Autowired
     UserDetailsService userDetailService;
+
+    @Autowired
+    private JwtFilter jwtFilter;
 
     @Bean
     public AuthenticationManager authenticationManager(
@@ -33,13 +38,21 @@ public class SecurityConfig {
     public SecurityFilterChain defaultSecurityFilter(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(req ->
-                        req.requestMatchers(HttpMethod.POST, "/api/v1/users/**").permitAll()
-                );
+                .authorizeHttpRequests(request -> request
+                        .requestMatchers(HttpMethod.GET, "/api/v1/users/")
+                        .permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/v1/users/")
+                        .permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/v1/products/")
+                        .authenticated()
+                )
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+
 
         return http.build();
     }
 
+    // retrieves user details from a UserDetailsService
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
