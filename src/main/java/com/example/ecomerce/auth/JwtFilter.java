@@ -41,15 +41,20 @@ public class JwtFilter extends OncePerRequestFilter {
         }
 
         // Get user identity and set it on the spring security context
-        String token = authorizationHeader.substring(7);
-        String userEmail = jwtUtils.getUsernameFromJwtToken(token);
+        // 7: after bearer and space
+        String jwtToken = authorizationHeader.substring(7);
+        String userEmail = jwtUtils.getUsernameFromJwtToken(jwtToken);
 
         UserDetails userDetails = userDetailService.loadUserByUsername(userEmail);
-
-        if (jwtUtils.validateJwtToken(token)) {
+        System.out.println("isValid" + jwtUtils.validateJwtToken(jwtToken));
+        
+        if (jwtUtils.validateJwtToken(jwtToken)) {
             // add to spring security context
-            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-            authentication.setDetails(new WebAuthenticationDetailsSource());
+            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                    userDetails,
+                    null,
+                    userDetails.getAuthorities());
+
             authentication.setDetails(
                     new WebAuthenticationDetailsSource().buildDetails(request)
             );

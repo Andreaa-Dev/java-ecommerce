@@ -66,6 +66,7 @@ public class UserController {
 
         // todo: check password match
         String jwt = jwtUtils.generateJwtToken(userCreationDTO.getEmail());
+        System.out.println("token" + jwt);
         return ResponseEntity.ok(new JwtResponse(jwt));
     }
 }
