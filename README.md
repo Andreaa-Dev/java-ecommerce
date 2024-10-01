@@ -27,8 +27,8 @@ This is the backend of an e-commerce website built using Java. The backend manag
 
 - Java 17 or higher
 - Maven 3.6+
-- MySQL/PostgreSQL (or your preferred relational database)
-- An IDE (e.g., IntelliJ IDEA, Eclipse)
+- PostgreSQL
+- An IDE (IntelliJ IDEA)
 
 ### Steps to Run
 
